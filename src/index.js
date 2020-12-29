@@ -5,7 +5,9 @@ const loggerSubscription = (x) => {
   console.log(x);
 };
 
-interval(2000).pipe(
+const ticker$ = interval(2000).pipe(
   map((x) => x * 2 + x),
   filter((x) => x % 2 === 0),
 ).subscribe(loggerSubscription);
+
+setTimeout(() => { ticker$.unsubscribe(); }, 20000);
